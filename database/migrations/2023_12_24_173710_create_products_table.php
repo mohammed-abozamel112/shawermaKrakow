@@ -17,12 +17,12 @@ return new class extends Migration
             $table->string('description');
             $table->string('category');
             $table->string('quantity');
-            $table->enum('availability', ['true', 'false']);
-            $table->enum('top_product', ['true', 'false']);
+            $table->boolean('availability')->default(true);
+            $table->boolean('top_product')->default(false);
             $table->float('weight');
             $table->float('price_before_discount');
-            $table->float('price_after_discount');
-            $table->string('image')->nullable();
+            $table->float('price_after_discount')->nullable();
+            $table->string('image');
             $table->foreignId('shawerma_krakows_id')->constrained();
             $table->timestamps();
         });

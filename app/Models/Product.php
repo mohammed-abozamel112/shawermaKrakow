@@ -9,8 +9,22 @@ class Product extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    public function orders()
+    protected $fillable = [
+        'name',
+        'description',
+        'category',
+        'quantity',
+        'availability',
+        'top_product',
+        'weight',
+        'price_before_discount',
+        'price_after_discount',
+        'image',
+        'shawerma_krakows_id',
+    ];
+
+    public function shawermaKrakow()
     {
-        return $this->belongsToMany(Order::class);
+        return $this->belongsTo(ShawermaKrakow::class, 'shawerma_krakows_id');
     }
 }
