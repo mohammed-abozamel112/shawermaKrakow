@@ -30,7 +30,7 @@ class StoreProductRequest extends FormRequest
             'price_before_discount' => ['required', 'numeric'],
             'availability'=>['boolean'],
             'top_product'=>['boolean'],
-            'image'=>['required','file','image'],
+            'image'=>['required','image'],
 
         ];
     }

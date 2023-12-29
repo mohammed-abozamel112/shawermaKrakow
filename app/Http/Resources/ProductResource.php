@@ -25,12 +25,10 @@ class ProductResource extends JsonResource
             'weight' => $this->weight,
             'price_before_discount' => $this->price_before_discount,
             'price_after_discount' => $this->price_after_discount,
-            'image' => $this->image,
+            'image' => asset('images/products' . $this->image),
             'shawermakrakows_id' => $this->shawerma_krakows_id,
-            'created_at' => (string) $this->created_at,
+            'created_at' => now()->diffForHumans($this->created_at),
             'updated_at' => now()->diffForHumans($this->updated_at),
-
-
         ];
     }
 }

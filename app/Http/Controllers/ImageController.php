@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreImageRequest;
 use App\Http\Requests\UpdateImageRequest;
+use App\Http\Resources\ImageCollection;
 use App\Models\Image;
+use Exception;
 
 class ImageController extends Controller
 {
@@ -13,47 +15,49 @@ class ImageController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $images = new ImageCollection(Image::all());
+            return response()->json([
+                $images,
+            ]);
+        } catch (Exception $e) {
+            return response()->json(
+                ['error' => 'An error occurred while trying to retrieve images.'], 500);
+        }
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      */
     public function store(StoreImageRequest $request)
     {
-        //
-    }
+        /*  // Save image to database and get its id
+         $imageId = Image::create($request->validated())->id;
+         // Return the saved image with its id
+         return response()->json(['data' => Image::findOrFail($imageId)]); */
+        try {
+            $image = Image::create([
+                "title" => $request->title,
+                "url" => $request->file('url')->store("images/main")
+            ]);
+            return response()->json([$image]);
+        } catch (Exception $e) {
+            return response()->json(["error" => "Error uploading file"], 422);
+        }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Image $image)
-    {
-        //
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Image $image)
-    {
-        //
-    }
-
     /**
      * Update the specified resource in storage.
      */
     public function update(UpdateImageRequest $request, Image $image)
     {
-        //
+        try {
+            $image->update([
+                "title" => $request->input("title"),
+                "url" => $request->input("url"),
+            ]);
+        } catch (Exception $e) {
+            return response()->json(["error" => "Failed to update image."], 500);
+        }
     }
 
     /**

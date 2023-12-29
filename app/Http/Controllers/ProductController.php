@@ -35,14 +35,25 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
+
         try {
-            $product = Product::create($request->validated());
+            $product = Product::create(
+                [
+                    'name' => $request->name,
+                    'description' => $request->description,
+                    'category' => $request->category,
+                    'quantity' => $request->quantity,
+                    'availability' => filter_var($request->availability, FILTER_VALIDATE_BOOLEAN),
+                    'top_product' => filter_var($request->top_product, FILTER_VALIDATE_BOOLEAN),
+                    'weight' => $request->weight,
+                    'price_before_discount' => $request->price_before_discount,
+                    'image' => $request->file('image')->store('products'),
+                ]);
             $product->save();
-            return response()->json([
+            return response->json([
                 "success" => true,
                 $product,
             ]);
-
         } catch (Exception $e) {
             return response()->json([
                 "success" => false,
@@ -56,7 +67,17 @@ class ProductController extends Controller
     public function update(UpdateProductRequest $request, Product $product)
     {
         try {
-            $product->update($request->validated());
+            $product->update([
+                'name' => $request->name,
+                'description' => $request->description,
+                'category' => $request->category,
+                'quantity' => $request->quantity,
+                'availability' => filter_var($request->availability, FILTER_VALIDATE_BOOLEAN),
+                'top_product' => filter_var($request->top_product, FILTER_VALIDATE_BOOLEAN),
+                'weight' => $request->weight,
+                'price_before_discount' => $request->price_before_discount,
+                'image' => $request->file('image')->store('products'),
+            ]);
             $product->save();
             return response()->json([
                 'success' => true,

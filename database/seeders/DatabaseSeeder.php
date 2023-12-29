@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ShawermaKrakowSeeder::class,
             ProductSeeder::class,
+            ImageSeeder::class,
         ]);
     }
 }
