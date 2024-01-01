@@ -9,8 +9,8 @@ class Employee extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    public function shawermaKrakow()
+    public function user()
     {
-        return $this->belongsTo(ShawermaKrakow::class);
+        return $this->belongsTo(User::class);
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateProductRequest;
 use App\Http\Resources\ProductCollection;
 use App\Models\Product;
 use Exception;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -47,13 +48,13 @@ class ProductController extends Controller
                     'top_product' => filter_var($request->top_product, FILTER_VALIDATE_BOOLEAN),
                     'weight' => $request->weight,
                     'price_before_discount' => $request->price_before_discount,
-                    'image' => $request->file('image')->store('products'),
+                    'image' => Storage::putFile('images',$request->file('image')),
                 ]);
-            $product->save();
-            return response->json([
+                     return response()->json([
                 "success" => true,
                 $product,
             ]);
+
         } catch (Exception $e) {
             return response()->json([
                 "success" => false,
@@ -76,9 +77,8 @@ class ProductController extends Controller
                 'top_product' => filter_var($request->top_product, FILTER_VALIDATE_BOOLEAN),
                 'weight' => $request->weight,
                 'price_before_discount' => $request->price_before_discount,
-                'image' => $request->file('image')->store('products'),
+                'image' => Storage::putFile('images', $request->file('image')),
             ]);
-            $product->save();
             return response()->json([
                 'success' => true,
                 $product

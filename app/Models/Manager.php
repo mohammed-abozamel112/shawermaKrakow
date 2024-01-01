@@ -14,4 +14,8 @@ class Manager extends Model
     {
         return $this->belongsTo(ShawermaKrakow::class);
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'mobile',
+        'type',
     ];
 
     /**
@@ -42,4 +44,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function customer(){
+        return $this->hasone(Customer::class);
+    }
+    public function Employee(){
+        return $this->hasOne(Employee::class);
+    }
+    public function manager(){
+        return $this->hasOne(Manager::class);
+    }
 }

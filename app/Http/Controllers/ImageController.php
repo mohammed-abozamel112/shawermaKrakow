@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateImageRequest;
 use App\Http\Resources\ImageCollection;
 use App\Models\Image;
 use Exception;
+use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
 {
@@ -37,7 +38,7 @@ class ImageController extends Controller
         try {
             $image = Image::create([
                 "title" => $request->title,
-                "url" => $request->file('url')->store("images/main")
+                "url" => Storage::putFile('images',$request->file('url')),/*  $request->file('url')->store("images/main") */
             ]);
             return response()->json([$image]);
         } catch (Exception $e) {
