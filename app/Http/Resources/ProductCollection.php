@@ -16,6 +16,8 @@ class ProductCollection extends ResourceCollection
     {
         return [
             "products" => $this->collection,
+            'api_version' => '1.0.0',
+            'time' => date('h:i:s a'),
         ];
     }
 }

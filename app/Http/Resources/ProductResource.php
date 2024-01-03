@@ -26,7 +26,7 @@ class ProductResource extends JsonResource
             'price_before_discount' => $this->price_before_discount,
             'price_after_discount' => $this->price_after_discount,
             'image' => asset($this->image),
-            'shawermakrakows_id' => $this->shawerma_krakows_id,
+            'shawerma_krakows_id' => $this->shawerma_krakows_id,
             'created_at' => now()->diffForHumans($this->created_at),
             'updated_at' => now()->diffForHumans($this->updated_at),
         ];
