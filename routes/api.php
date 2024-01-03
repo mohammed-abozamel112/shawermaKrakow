@@ -22,4 +22,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('products',ProductController::class);
 Route::apiResource('images',ImageController::class);
-// Route::apiResource('products',ProductController::class);
+
