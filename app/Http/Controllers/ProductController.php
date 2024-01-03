@@ -20,7 +20,7 @@ class ProductController extends Controller
             $products = new ProductCollection(Product::all());
             return response()->json([
                 'success' => true,
-                'products' => $products,
+                $products,
             ]);
         } catch (Exception $e) {
             return response()->json([
@@ -48,9 +48,10 @@ class ProductController extends Controller
                     'top_product' => filter_var($request->top_product, FILTER_VALIDATE_BOOLEAN),
                     'weight' => $request->weight,
                     'price_before_discount' => $request->price_before_discount,
-                    'image' => Storage::putFile('images',$request->file('image')),
-                ]);
-                     return response()->json([
+                    'image' => Storage::putFile('images', $request->file('image')),
+                ]
+            );
+            return response()->json([
                 "success" => true,
                 $product,
             ]);
