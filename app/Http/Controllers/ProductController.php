@@ -28,7 +28,6 @@ class ProductController extends Controller
                 'message' => $e->getMessage(),
             ]);
         }
-
     }
 
     /**
