@@ -17,6 +17,7 @@ class ImageResource extends JsonResource
         return [
             "id" => $this->id,
             "title"=> $this->title,
+            "label"=>$this->label,
             'url' => asset($this->url),
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at
