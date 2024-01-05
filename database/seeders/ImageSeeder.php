@@ -16,66 +16,77 @@ class ImageSeeder extends Seeder
     {
         Image::create([
             'title' => 'Banner 2',
+            'label' => 'background',
             'url' => asset('storage/images/main/Banner_2.webp'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
         Image::create([
             'title' => 'Cards bg',
+            'label' => 'background',
             'url' => asset('storage/images/main/Cards_bg.webp'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
         Image::create([
             'title' => 'Pack food',
+            'label' => 'pack_food',
             'url' => asset('storage/images/main/Pack_food.webp'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
         Image::create([
             'title' => 'Sausage',
+            'label' => 'sausage',
             'url' => asset('storage/images/main/Sausage.webp'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
         Image::create([
             'title' => 'About img 1',
+            'label' => 'about',
             'url' => asset('storage/images/main/about/About_img_1.webp'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
         Image::create([
             'title' => 'About img 2',
+            'label' => 'about',
             'url' => asset('storage/images/main/about/About_img_2.webp'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
         Image::create([
             'title' => 'About main img',
+            'label' => 'about_main',
             'url' => asset('storage/images/main/about/About_main_img.webp'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
         Image::create([
             'title' => 'Team 1',
+            'label' => 'team',
             'url' => asset('storage/images/main/team/Team_1.webp'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
         Image::create([
             'title' => 'Team 2',
+            'label' => 'team',
             'url' => asset('storage/images/main/team/Team_2.webp'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
         Image::create([
             'title' => 'Team 3',
+            'label' => 'team',
             'url' => asset('storage/images/main/team/Team_3.webp'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
         Image::create([
             'title' => 'Team bg',
+            'label' => 'team_bg',
             'url' => asset('storage/images/main/team/Team_bg.webp'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),

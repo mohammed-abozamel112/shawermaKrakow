@@ -23,6 +23,7 @@ class UpdateImageRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string|min:2'],
+            'label' => ['string'],
             'url' => ['required', 'image'],
         ];
     }
