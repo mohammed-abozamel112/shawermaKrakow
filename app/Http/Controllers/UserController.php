@@ -12,7 +12,12 @@ class UserController extends Controller
 {
     public function index()
     {
-        return User::all();
+        /* $users = User::all();
+        return response()->json([
+            'status' => true,
+            'message' => 'List of users',
+            'data' => $users
+        ]); */
     }
 
     public function store(Request $request)
@@ -35,12 +40,7 @@ class UserController extends Controller
             'mobile' => $request->mobile,
             'type' => $request->type,
         ]);
-        
-        if ($user->type === 'customer') {
-            Customer::create([
-                'user_id' => $user->id,
-            ]);
-        }
+
         if ($user->type === 'employee') {
             Employee::create([
                 'user_id' => $user->id,

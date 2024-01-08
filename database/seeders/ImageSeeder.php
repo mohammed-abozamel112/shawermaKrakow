@@ -91,5 +91,61 @@ class ImageSeeder extends Seeder
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
+        Image::create([
+            'title' => 'instagram 1',
+            'label' => 'instagram',
+            'url' => asset('storage/images/main/instagram/instagram_1.webp'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        Image::create([
+            'title' => 'instagram 2',
+            'label' => 'instagram',
+            'url' => asset('storage/images/main/instagram/instagram_2.webp'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        Image::create([
+            'title' => 'instagram 3',
+            'label' => 'instagram',
+            'url' => asset('storage/images/main/instagram/instagram_3.webp'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        Image::create([
+            'title' => 'instagram 4',
+            'label' => 'instagram',
+            'url' => asset('storage/images/main/instagram/instagram_4.webp'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        Image::create([
+            'title' => 'instagram 5',
+            'label' => 'instagram',
+            'url' => asset('storage/images/main/instagram/instagram_5.webp'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        Image::create([
+            'title' => 'instagram 6',
+            'label' => 'instagram',
+            'url' => asset('storage/images/main/instagram/instagram_6.webp'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        Image::create([
+            'title' => 'instagram 7',
+            'label' => 'instagram',
+            'url' => asset('storage/images/main/instagram/instagram_7.webp'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        Image::create([
+            'title' => 'instagram 8',
+            'label' => 'instagram',
+            'url' => asset('storage/images/main/instagram/instagram_8.webp'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
     }
 }

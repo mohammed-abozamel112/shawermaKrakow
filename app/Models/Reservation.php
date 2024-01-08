@@ -10,9 +10,9 @@ class Reservation extends Model
     use HasFactory;
     protected $guarded = ['id'];
 
-    public function customer()
+    public function user()
     {
-        return $this->belongsTo(Customer::class);
+        return $this->belongsTo(User::class);
     }
 
     public function shawermaKrakow()

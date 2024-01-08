@@ -16,7 +16,7 @@ return new class extends Migration
             $table->text('details');
             $table->float('shipping');
             $table->decimal('total_amount', 8, 2);
-            $table->foreignId('customer_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->foreignId('shawerma_krakows_id')->constrained();
             $table->timestamps();
         });
