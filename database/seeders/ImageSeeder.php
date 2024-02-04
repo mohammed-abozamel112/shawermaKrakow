@@ -147,5 +147,12 @@ class ImageSeeder extends Seeder
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
+        Image::create([
+            'title' => 'seo',
+            'label' => 'seo',
+            'url' => asset('storage/images/main/seo/seo.webp'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
     }
 }

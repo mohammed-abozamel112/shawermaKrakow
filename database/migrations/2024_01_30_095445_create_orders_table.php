@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -16,6 +15,7 @@ return new class extends Migration
             $table->string('token')->unique();
             $table->float('shipping')->default(0.2);
             $table->decimal('total', 8, 2);
+            $table->decimal('total_with_shipping', 8, 2);
             // email and phone number
             $table->string('email');
             $table->string('phone_number');
@@ -28,11 +28,11 @@ return new class extends Migration
             $table->string('last_name');
             $table->text('address');
             $table->string('city');
-            $table->string('country');
+            $table->string('country')->default('poland');
             $table->string('post_code');
 
             //payment
-            $table->string('payment_method')->nullable();
+            $table->enum('payment_method', ['cash', 'credit_card'])->default('credit_card');
             $table->bigInteger('card_number');
             $table->string('expire_date');
             $table->string('security_code');

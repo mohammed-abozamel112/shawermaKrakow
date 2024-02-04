@@ -4,6 +4,8 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SendMailController;
+use App\Http\Controllers\SubscriptionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,26 +27,28 @@ use Illuminate\Support\Facades\Route;
 
 Route::apiResource('products', ProductController::class);
 Route::apiResource('images', ImageController::class);
-// Route::apiResource('orders', OrderController::class);
 
 //mailer
-// Route::post('sendemail', [SendMailController::class, 'store']);
+Route::post('sendemail', [SendMailController::class, 'store']);
 
 
 //Subscription
-/* Route::prefix('subscription')->group(function () {
+Route::prefix('subscription')->group(function () {
     // subscription CRUD
     Route::controller(SubscriptionController::class)->group(function () {
         Route::get('index', 'index');
         Route::post('store', 'store');
     });
-}); */
+});
 
 //orders
 Route::prefix('orders')->group(function () {
     Route::controller(OrderController::class)->group(function () {
         Route::get('index', 'index');
+        Route::post('show', 'show');
         Route::post('store', 'store');
+        Route::post('update/{id}', 'update');
+        Route::post('delete/{id}', 'destroy');
     });
 });
 

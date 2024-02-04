@@ -23,7 +23,8 @@ class Shawermakrakow extends Model
     {
         return $this->belongsTo(Product::class);
     }
-    public function order() {
-        return $this->belongsTo(Order::class);
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'shawermakrakows_id');
     }
 }

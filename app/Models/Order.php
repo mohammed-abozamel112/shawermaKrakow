@@ -13,6 +13,7 @@ class Order extends Model
         'token',
         'shipping',
         'total',
+        'total_with_shipping',
         'email',
         'phone_number',
         'first_name',
@@ -35,7 +36,7 @@ class Order extends Model
     {
         return $this->hasMany(OrderItems::class);
     }
-    public function shawermaKrakow()
+    public function shawermakrakow()
     {
         return $this->belongsTo(Shawermakrakow::class, 'shawermakrakows_id');
     }
