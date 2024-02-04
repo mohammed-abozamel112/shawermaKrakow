@@ -151,7 +151,7 @@ class OrderController extends Controller
 
             // Create order
             $order = Order::create([
-                'token' => Str::uuid(16),
+                'token' => Str::uuid(),
                 'shipping' => $shipping_val,
                 'total' => $total,
                 'total_with_shipping' => $total_with_shipping,
@@ -169,35 +169,6 @@ class OrderController extends Controller
                 'security_code' => $request->security_code,
             ]);
 
-
-            //send mail to  customer with order details and adminstrator with order details
-
-            $mail = new PHPMailer(true);
-            $name = $request->first_name . " " . $request->last_name;
-            $email = $request->email;
-
-            /* Email SMTP Settings */
-            $mail->SMTPDebug = 0;
-            $mail->isSMTP();
-            $mail->Host = env('MAIL_HOST');
-            $mail->SMTPAuth = true;
-            $mail->Username = env('MAIL_USERNAME');
-            $mail->Password = env('MAIL_PASSWORD');
-            $mail->SMTPSecure = env('MAIL_ENCRYPTION');
-            $mail->Port = env('MAIL_PORT');
-
-            //Recipients
-            $mail->setFrom('hassan@shawermakrakow.com', 'Shawerma krakow');
-            $mail->addAddress($email, $name);     //Add a recipient
-
-            //Content
-            $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = 'Thank you for your Order';
-            $mail->Body = 'Hi' . ' ' . $name . ', we are getting your order ready .<br> <b> Here is The Id Of Your Order : </b> ' . $order->token;
-
-            $mail->send();
-
-            /* end mail */
             // Save order items
             $orderItems = array_map(function ($item) use ($order) {
                 $orderItem = OrderItems::create([
@@ -215,6 +186,74 @@ class OrderController extends Controller
 
                 return $orderItem;
             }, $cartItemsArray);
+
+
+            //send mail to  customer with order details and adminstrator with order details
+
+            if ($order) {
+                $mail = new PHPMailer(true);
+                $name = $request->first_name . " " . $request->last_name;
+                $email = $request->email;
+
+                /* Email SMTP Settings */
+                $mail->SMTPDebug = 0;
+                $mail->isSMTP();
+                $mail->Host = env('MAIL_HOST');
+                $mail->SMTPAuth = true;
+                $mail->Username = env('MAIL_USERNAME');
+                $mail->Password = env('MAIL_PASSWORD');
+                $mail->SMTPSecure = env('MAIL_ENCRYPTION');
+                $mail->Port = env('MAIL_PORT');
+
+                //Recipients
+                $mail->setFrom('hassan@shawermakrakow.com', 'Shawerma krakow');
+                $mail->addAddress($email, $name);     //Add a recipient
+
+                //Content
+                $mail->isHTML(true);                                  //Set email format to HTML
+                $mail->Subject = 'Thank you for your Order';
+                /*  $mail->Body = "<h1 style='text-align:center;color:black;'>Shawerma Krakow</h1>" .
+                     "<p style='font-size:1.25rem;'> Hi " . $name . " we are getting your order ready </p>.
+                   <p style='font-size:1rem;'> <b> Here is The Id Of Your Order :</b> " . $order->token . "</p>" . "<p> If yo want  to tack Your order
+                   <a href='https://shawermakrakow.com/'> Click Here</a></p>" .
+                     "Order summary"; */
+
+
+                $mail->Body = "<h1 style='text-align:center;color:black;'>Shawerma Krakow</h1>" .
+                    "<p style='font-size:1.25rem;'> Hi $name, we are getting your order ready </p>.
+          <p style='font-size:1rem;'> <b> Here is The Id Of Your Order :</b> $order->token</p>" .
+                    "<p> If you want to track your order <a href='https://shawermakrakow.com/'>Click Here</a></p>" .
+                    "<h2>Order Summary</h2>" .
+                    "<table style='text-align:center;color:black;width:80%;'>" .
+                    "<thead>" .
+                    "<tr>" .
+                    "<th>Item</th>" .
+                    "<th>Quantity</th>" .
+                    "<th>Image</th>" .
+                    "<th>Price</th>" .
+                    "</tr>" .
+                    "</thead>" .
+                    "<tbody>";
+
+                foreach ($orderItems as $orderItem) {
+                    $product = Product::findOrFail($orderItem->product_id);
+                    $mail->Body .= "<tr>" .
+                        "<td>$product->name</td>" .
+                        "<td>$orderItem->quantity</td>" .
+                        "<td><img width=10rem src=url($product->image)></td>" .
+                        "<td>$orderItem->subtotal \$</td>" .
+                        "</tr>";
+                }
+
+                $mail->Body .= "</tbody>" .
+                    "</table>";
+
+                $mail->Body .= "<p><b>Total:</b> \$$order->total</p>" .
+                    "<p><b>Total With Shipping:</b> \$$order->total_with_shipping</p>";
+
+                $mail->send();
+            }
+            /* end mail */
 
             return response()->json([
                 "success" => true,
